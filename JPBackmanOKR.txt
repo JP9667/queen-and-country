@@ -1,0 +1,4 @@
+Schedule and Delivarables:
+  Player ship movement -- Mon by 1pm (estimate:1 hr)
+  Overseer movement -- Mon by 2pm (estimate:1 hr)
+  Overseer object placement -- Mon by 6pm (estimate:2-3 hrs)
