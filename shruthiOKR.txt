@@ -1,0 +1,4 @@
+Schedule and Delivarables:
+  Rendering win/lose message on player ship mode -- Wed by 4pm (estimate: 2 hr)
+  Player ship speed and movement -- Thursday by 2pm (estimate: 1 hr)
+  2 Player ships networking -- Tuesday by 9pm (estimate: 3 hrs)
