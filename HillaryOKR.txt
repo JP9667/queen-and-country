@@ -1,0 +1,7 @@
+Schedule and deliverable:
+	Allow Overseer to place different types of objects. -Tuesday by 5pm.
+	(est. 1 hour)
+	Player ship shouldn't be able to see overseer invisible box. -Tuesday by 5pm.
+	(est. 1 hour)
+	Get networking to work so that the overseer is the host and the sailor is the client.-Wednesday by 12pm.
+	(est. 5 hours)
