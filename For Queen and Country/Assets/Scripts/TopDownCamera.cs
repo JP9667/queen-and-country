@@ -6,18 +6,25 @@ public class TopDownCamera : MonoBehaviour {
 
     public float panSpeed = 10f;
     public bool onSurface = false;
+    private int currentObject = 0;
 
     public Transform rock;
-    public GameObject rockCursor;
+    public Transform windArea;
+    //public GameObject rockCursor;
+
+    public GameObject[] cursorArray = new GameObject[3];
+    public GameObject cursor;
 
     RaycastHit hit;
 
     private void Start()
     {
+        cursorArray[1].SetActive(false);
+        cursor = cursorArray[0];
         var raycast = new Ray(transform.position, transform.forward);
         if (Physics.Raycast(raycast, out hit, 20f))
         {
-            rockCursor.transform.position = hit.point;
+            cursor.transform.position = hit.point;
         }
     }
 
@@ -26,8 +33,6 @@ public class TopDownCamera : MonoBehaviour {
 
         if (Input.GetKey(KeyCode.W))
         {
-            //print("Entered W");
-            //transform.position.z += panSpeed * Time.deltaTime;
             transform.Translate(Vector3.up * Time.deltaTime * panSpeed, Space.Self);
         }
         if (Input.GetKey(KeyCode.S))
@@ -43,12 +48,27 @@ public class TopDownCamera : MonoBehaviour {
             transform.Translate(Vector3.right * Time.deltaTime * panSpeed, Space.Self);
         }
 
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            cursor.SetActive(false);
+            cursor = cursorArray[0];
+            cursor.SetActive(true);
+            currentObject = 0;
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            cursor.SetActive(false);
+            cursor = cursorArray[1];
+            cursor.SetActive(true);
+            currentObject = 1;
+        }
+
 
         var raycast = new Ray(transform.position, transform.forward);
         if (Physics.Raycast(raycast, out hit, 20f))
         {
             onSurface = true;
-            rockCursor.transform.position = hit.point;
+            cursor.transform.position = hit.point;
         }
         else
         {
@@ -57,16 +77,32 @@ public class TopDownCamera : MonoBehaviour {
 
         if (Input.GetKeyDown(KeyCode.Space) && onSurface)
         {
-            print("Hit space and raycast hit");
-            Instantiate(rock, hit.point, Quaternion.identity);
-
-            /* GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
-             cube.AddComponent<Rigidbody>();
-             cube.GetComponent<Rigidbody>().useGravity = false;
-             cube.GetComponent<Rigidbody>().isKinematic = true;
-             cube.transform.position = hit.point;*/
+            if(cursor.GetComponent<CursorCollision>().GetCollision() == false)
+            {
+                print("Hit space and raycast hit");
+                PlaceObjectType();
+            }
         }
 
 
     }
+
+    private void PlaceObjectType()
+    {
+        switch (currentObject)
+        {
+            case 0:
+                Instantiate(rock, hit.point, Quaternion.identity);
+                break;
+            case 1:
+                Instantiate(windArea, hit.point, Quaternion.identity);
+                break;
+            default:
+                break;
+        }
+
+    }
+
+
+
 }

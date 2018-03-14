@@ -32,6 +32,7 @@ public class PlayerSwitch : MonoBehaviour {
             playerShipActive = true;
             overseer.enabled = false;
 
+            overseer.GetComponent<TopDownCamera>().cursor.SetActive(false);
             overseer.GetComponent<TopDownCamera>().enabled = false;
             playerShip.GetComponent<PlayerShipController>().enabled = true;
         }

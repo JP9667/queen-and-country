@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class PlayerShipController : MonoBehaviour {
 
-    public float speed = 5f;
+    public float speed = 2f;
 
+    //public bool inWindZone = false;
     private Rigidbody rb;
 
 	// Use this for initialization
@@ -17,6 +19,11 @@ public class PlayerShipController : MonoBehaviour {
 	void Update () {
         float hAxis = Input.GetAxis("Horizontal");
         float vAxis = Input.GetAxis("Vertical");
+
+        if(vAxis < 0)
+        {
+            vAxis *= 0.15f;
+        }
 
         Vector3 movement = new Vector3(-vAxis, 0, hAxis) * speed * Time.deltaTime;
 
@@ -38,6 +45,7 @@ public class PlayerShipController : MonoBehaviour {
         if (collision.gameObject.transform.tag == "Dock")
         {
             print("You win!");
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
 
