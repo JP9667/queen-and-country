@@ -9,6 +9,7 @@ public class PlayerShipController : MonoBehaviour {
     public float steerSpeed = 0.75f;
     public float movementThreshold;
     public float cannonballSpeed = 20.0f;
+    public bool hasKey = false;
 
     //public bool inWindZone = false;
     //private Rigidbody rb;
@@ -21,6 +22,9 @@ public class PlayerShipController : MonoBehaviour {
     private GameObject[] portCannonballs = new GameObject[3];
     public GameObject[] starBoardCannons = new GameObject[3];
     private GameObject[] starBoardCannonballs = new GameObject[3];
+    public GameObject rearCannon;
+    private GameObject rearCannonball;
+    public GameObject treasureChest;
 
     // Use this for initialization
     void Start () {
@@ -52,7 +56,7 @@ public class PlayerShipController : MonoBehaviour {
 
         transform.Rotate(0.0f, steerFactor * steerSpeed, 0.0f);
 
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.Q) || Input.GetMouseButtonDown(0))
         {
             for(int i = 0; i < 3; i++)
             {
@@ -62,7 +66,7 @@ public class PlayerShipController : MonoBehaviour {
                 Destroy(portCannonballs[i], 1.0f);
             }
         }
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E) || Input.GetMouseButtonDown(1))
         {
             for (int i = 0; i < 3; i++)
             {
@@ -71,6 +75,13 @@ public class PlayerShipController : MonoBehaviour {
                 Destroy(starBoardCannonballs[i], 1.0f);
             }
         }
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            rearCannonball = Instantiate(cannonball, rearCannon.transform.position, rearCannon.transform.rotation);
+            rearCannonball.GetComponent<Rigidbody>().velocity = rearCannonball.transform.forward * cannonballSpeed;
+            Destroy(rearCannonball, 1.0f);
+        }
+
     }
 
     /*private void FixedUpdate()
@@ -90,6 +101,11 @@ public class PlayerShipController : MonoBehaviour {
             print("You win!");
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
+    }
+
+    public void HasTreasure()
+    {
+        treasureChest.SetActive(true);
     }
 
 }

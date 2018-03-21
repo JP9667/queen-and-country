@@ -10,9 +10,11 @@ public class TopDownCamera : MonoBehaviour {
 
     public Transform rock;
     public Transform windArea;
+    public Transform enemyShip;
+    public Transform cannon;
     //public GameObject rockCursor;
 
-    public GameObject[] cursorArray = new GameObject[3];
+    public GameObject[] cursorArray = new GameObject[4];
     public GameObject cursor;
 
     RaycastHit hit;
@@ -20,6 +22,8 @@ public class TopDownCamera : MonoBehaviour {
     private void Start()
     {
         cursorArray[1].SetActive(false);
+        cursorArray[2].SetActive(false);
+        cursorArray[3].SetActive(false);
         cursor = cursorArray[0];
         var raycast = new Ray(transform.position, transform.forward);
         if (Physics.Raycast(raycast, out hit, 20f))
@@ -47,6 +51,15 @@ public class TopDownCamera : MonoBehaviour {
         {
             transform.Translate(Vector3.right * Time.deltaTime * panSpeed, Space.Self);
         }
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            panSpeed *= 3;
+        }
+        if (Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            panSpeed /= 3;
+        }
+
 
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
@@ -61,6 +74,20 @@ public class TopDownCamera : MonoBehaviour {
             cursor = cursorArray[1];
             cursor.SetActive(true);
             currentObject = 1;
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            cursor.SetActive(false);
+            cursor = cursorArray[2];
+            cursor.SetActive(true);
+            currentObject = 2;
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            cursor.SetActive(false);
+            cursor = cursorArray[3];
+            cursor.SetActive(true);
+            currentObject = 3;
         }
 
 
@@ -96,6 +123,12 @@ public class TopDownCamera : MonoBehaviour {
                 break;
             case 1:
                 Instantiate(windArea, hit.point, Quaternion.identity);
+                break;
+            case 2:
+                Instantiate(enemyShip, hit.point, Quaternion.identity);
+                break;
+            case 3:
+                Instantiate(cannon, hit.point, Quaternion.identity);
                 break;
             default:
                 break;

@@ -10,6 +10,20 @@ public class CannonballCollision : MonoBehaviour {
         if(other.gameObject.transform.tag == "Enemy Ship")
         {
             print("Cannonball hit enemy ship");
+            if (other.gameObject.GetComponent<EnemyShipController>().hasKey)
+            {
+                GameObject.FindWithTag("Player Ship").GetComponent<PlayerShipController>().hasKey = true;
+            }
+
+            Destroy(other.gameObject);
         }
+
+        if (other.gameObject.transform.tag == "Treasure Ship")
+        {
+            print("Cannonball hit treasure ship");
+            GameObject.FindWithTag("Player Ship").GetComponent<PlayerShipController>().HasTreasure();
+            Destroy(other.gameObject);
+        }
+
     }
 }

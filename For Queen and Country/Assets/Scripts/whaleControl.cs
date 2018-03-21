@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class whaleControl : MonoBehaviour {
     public Transform[] Waypoints;
+    public int size = 2;
     public float Speed;
     public int curWayPoint;
     public bool doPatrol = true;
@@ -13,9 +14,12 @@ public class whaleControl : MonoBehaviour {
     public Vector3 Velocity;
     private Rigidbody whale;
 
+    public Transform Sphere1, Sphere2;
+
     private void Start()
     {
         whale = GetComponent<Rigidbody>();
+
     }
 
     private void Update()
