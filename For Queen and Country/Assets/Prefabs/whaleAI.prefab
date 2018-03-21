@@ -307,7 +307,6 @@ GameObject:
   - component: {fileID: 4147688831684310}
   - component: {fileID: 111125053391583072}
   - component: {fileID: 54203410350947872}
-  - component: {fileID: 114712992931573208}
   m_Layer: 0
   m_Name: whaleAI
   m_TagString: Untagged
@@ -802,26 +801,6 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 1
---- !u!114 &114712992931573208
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1818978784070786}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 51e13ad5444d5f64c9c205a64481a97a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Waypoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  Speed: 10
-  curWayPoint: 0
-  doPatrol: 1
-  Target: {x: 0, y: 0, z: 0}
-  MoveDirection: {x: 0, y: 0, z: 0}
-  Velocity: {x: 0, y: 0, z: 0}
 --- !u!137 &137319787903862642
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

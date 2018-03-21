@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 54584695618154416}
   m_Layer: 0
   m_Name: Treasure Ship
-  m_TagString: Untagged
+  m_TagString: Treasure Ship
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 33444583939526210}
   - component: {fileID: 65956105311980618}
   - component: {fileID: 23219180762030326}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -59,7 +59,7 @@ GameObject:
   - component: {fileID: 33453236570023986}
   - component: {fileID: 65417637409875814}
   - component: {fileID: 23655813153218884}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Sail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -77,7 +77,7 @@ GameObject:
   - component: {fileID: 33883827975343018}
   - component: {fileID: 136269921322365832}
   - component: {fileID: 23163718469618410}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Mast
   m_TagString: Untagged
   m_Icon: {fileID: 0}
