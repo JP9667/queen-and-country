@@ -71,5 +71,12 @@ public class EnemyShipController : MonoBehaviour {
         isPursuingShip = true;
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.transform.tag == "Player Cannonball")
+        {
+            Destroy(transform.gameObject);
+        }
 
+    }
 }

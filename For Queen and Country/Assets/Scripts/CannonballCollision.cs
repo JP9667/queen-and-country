@@ -26,4 +26,27 @@ public class CannonballCollision : MonoBehaviour {
         }
 
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.transform.tag == "Enemy Ship")
+        {
+            print("Cannonball hit enemy ship");
+            if (collision.gameObject.GetComponent<EnemyShipController>().hasKey)
+            {
+                GameObject.FindWithTag("Player Ship").GetComponent<PlayerShipController>().hasKey = true;
+            }
+
+            //Destroy(other.gameObject);
+        }
+
+        if (collision.gameObject.transform.tag == "Treasure Ship")
+        {
+            print("Cannonball hit treasure ship");
+            GameObject.FindWithTag("Player Ship").GetComponent<PlayerShipController>().HasTreasure();
+            Destroy(collision.gameObject);
+        }
+
+    }
+
 }

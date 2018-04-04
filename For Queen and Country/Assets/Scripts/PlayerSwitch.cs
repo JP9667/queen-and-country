@@ -28,6 +28,8 @@ public class PlayerSwitch : MonoBehaviour {
 	void Update () {
         if (Input.GetKeyDown(KeyCode.Return) && overseerActive)
         {
+            print("Camera switch from overseer");
+
             overseerActive = false;
             playerShipActive = true;
             overseer.enabled = false;
