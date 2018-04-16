@@ -32,7 +32,7 @@ public class CannonballCollision : MonoBehaviour {
         if (collision.gameObject.transform.tag == "Enemy Ship")
         {
             print("Cannonball hit enemy ship");
-            if (collision.gameObject.GetComponent<EnemyShipController>().hasKey)
+            if (transform.tag == "Player Cannonball" && collision.gameObject.GetComponent<EnemyShipController>().hasKey)
             {
                 GameObject.FindWithTag("Player Ship").GetComponent<PlayerShipController>().hasKey = true;
             }
@@ -43,8 +43,9 @@ public class CannonballCollision : MonoBehaviour {
         if (collision.gameObject.transform.tag == "Treasure Ship")
         {
             print("Cannonball hit treasure ship");
+            collision.gameObject.GetComponent<WaterBuoyancy.FloatingObject>().sinkShip();
             GameObject.FindWithTag("Player Ship").GetComponent<PlayerShipController>().HasTreasure();
-            Destroy(collision.gameObject);
+            //Destroy(collision.gameObject);
         }
 
     }

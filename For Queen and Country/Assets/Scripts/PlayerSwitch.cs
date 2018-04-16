@@ -8,6 +8,7 @@ public class PlayerSwitch : MonoBehaviour {
     public GameObject playerShip;
     public Camera playerShipCamera;
     public Camera mainCamera;
+    public GameObject pauseController;
 
     private bool overseerActive = true;
     private bool playerShipActive = false;
@@ -37,6 +38,7 @@ public class PlayerSwitch : MonoBehaviour {
             overseer.GetComponent<TopDownCamera>().cursor.SetActive(false);
             overseer.GetComponent<TopDownCamera>().enabled = false;
             playerShip.GetComponent<PlayerShipController>().enabled = true;
+            pauseController.GetComponent<PauseController>().PauseStartingScreen();
         }
 
         if (overseerActive)

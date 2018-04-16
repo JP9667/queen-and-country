@@ -14,20 +14,6 @@ public class canonFire : MonoBehaviour
 
     private bool firingAtPlayer = false;
 
-    private void Update()
-    {
-        //if (firingAtPlayer)
-        //{
-        
-        //}
-
-    }
-
-    /*private void TargetPlayer()
-    {
-       
-    }*/
-
     private void OnTriggerEnter(Collider other)
     {
 
@@ -46,7 +32,7 @@ public class canonFire : MonoBehaviour
             {
                 // targetTime = 5.0f; //reset time, it will perpetually run
                 GameObject newBullet = GameObject.Instantiate(CannonBall, Cannon.transform.position, Cannon.transform.rotation) as GameObject;
-                newBullet.GetComponent<Rigidbody>().velocity = Cannon.transform.forward * 13;
+                newBullet.GetComponent<Rigidbody>().velocity = Cannon.transform.forward * 16;
                 //newBullet.GetComponent<Rigidbody>().AddForce(newBullet.transform.right * 1000);
                 numCannonBalls -= 1;
                 Destroy(newBullet, 1.0f); //gets rid of shot cannons after a second

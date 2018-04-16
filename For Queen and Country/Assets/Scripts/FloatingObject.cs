@@ -32,6 +32,8 @@ namespace WaterBuoyancy
         private Vector3 voxelSize;
         private Vector3[] voxels;
 
+        public bool isSinking = false;
+
         protected virtual void Awake()
         {
             this.collider = this.GetComponent<Collider>();
@@ -80,6 +82,21 @@ namespace WaterBuoyancy
                 this.rigidbody.drag = Mathf.Lerp(this.initialDrag, this.dragInWater, submergedVolume);
                 this.rigidbody.angularDrag = Mathf.Lerp(this.initialAngularDrag, this.angularDragInWater, submergedVolume);
             }
+
+            if (isSinking)
+            {
+                this.density += 0.05f * Time.deltaTime;
+                //this.normalizedVoxelSize = 0.9f;
+            }
+        }
+
+        public void sinkShip()
+        {
+            isSinking = true;
+            this.angularDragInWater = 4.0f;
+            this.density = 0.6f;
+            this.normalizedVoxelSize = 1.0f;
+            Destroy(this.transform.gameObject, 10.0f);
         }
 
         protected virtual void OnTriggerEnter(Collider other)
