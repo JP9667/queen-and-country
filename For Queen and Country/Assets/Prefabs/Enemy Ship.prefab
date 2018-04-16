@@ -768,6 +768,17 @@ MonoBehaviour:
   mainCamera: {fileID: 0}
   isPursuingShip: 0
   hasKey: 0
+  cannonballSpeed: 13
+  fireRate: 2
+  cannonRange: 20
+  cannonball: {fileID: 0}
+  frontCannon: {fileID: 0}
+  portCannons:
+  - {fileID: 0}
+  - {fileID: 0}
+  starBoardCannons:
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!135 &135085473106122842
 SphereCollider:
   m_ObjectHideFlags: 1
