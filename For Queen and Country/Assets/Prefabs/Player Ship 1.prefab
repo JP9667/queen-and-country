@@ -175,7 +175,7 @@ GameObject:
   - component: {fileID: 114655117399567766}
   m_Layer: 0
   m_Name: Ship Camera
-  m_TagString: Untagged
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2133,6 +2133,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1374073538815920
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4332272306859320}
+  - component: {fileID: 82893273439312364}
+  m_Layer: 0
+  m_Name: Sound GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1378850482740642
 GameObject:
   m_ObjectHideFlags: 1
@@ -2948,6 +2964,7 @@ GameObject:
   - component: {fileID: 54417772693484586}
   - component: {fileID: 114842898629339948}
   - component: {fileID: 114986747541640294}
+  - component: {fileID: 82198603353374460}
   m_Layer: 0
   m_Name: Player Ship 1
   m_TagString: Player Ship
@@ -6928,6 +6945,19 @@ Transform:
   m_Father: {fileID: 4775998276060334}
   m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4332272306859320
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1374073538815920}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4778752057251870}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4335249097044458
 Transform:
   m_ObjectHideFlags: 1
@@ -9514,7 +9544,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1540559290439516}
   m_LocalRotation: {x: -0.5, y: -0.5, z: -0.5, w: 0.5}
-  m_LocalPosition: {x: 16.79, y: 0.23, z: 0}
+  m_LocalPosition: {x: 29.49, y: 0.23, z: 0}
   m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children:
   - {fileID: 4591261409809930}
@@ -9527,6 +9557,7 @@ Transform:
   - {fileID: 4692380312299538}
   - {fileID: 4491672303344756}
   - {fileID: 4819977223354424}
+  - {fileID: 4332272306859320}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: -90}
@@ -11332,7 +11363,167 @@ AudioListener:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1025172787013404}
-  m_Enabled: 0
+  m_Enabled: 1
+--- !u!82 &82198603353374460
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1540559290439516}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+--- !u!82 &82893273439312364
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1374073538815920}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 0.5
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!95 &95704088272215738
 Animator:
   serializedVersion: 3
@@ -11429,11 +11620,12 @@ MonoBehaviour:
   speed: 0.01
   maxSpeed: 0.05
   acceleration: 1
-  steerSpeed: 0.5
+  steerSpeed: 1
   movementThreshold: 0
   cannonballSpeed: 10
   hasKey: 0
-  shipHealth: 100
+  maxShipHealth: 100
+  currentShipHealth: 0
   cannonball: {fileID: 1354208254721206, guid: dc9d29328e6e7484890e8f0add2ee133, type: 2}
   portCannons:
   - {fileID: 1037631304911970}
@@ -11445,8 +11637,17 @@ MonoBehaviour:
   - {fileID: 1037427821604958}
   rearCannon: {fileID: 1605155292077084}
   treasureChest: {fileID: 1147953955839880}
+  pauseController: {fileID: 0}
+  playerUI: {fileID: 0}
+  soundObject: {fileID: 1374073538815920}
   lineAngle: -20
   sidePosition: {x: 0, y: 0, z: 0}
+  cannonFireSound: {fileID: 8300000, guid: 96f76759def7bf74ba849f6139bb720a, type: 3}
+  bellRingSound: {fileID: 8300000, guid: da3a6e7c84338cc40bf31f36b6e58fcb, type: 3}
+  itemPickUp: {fileID: 8300000, guid: 8c5a2ae98a336bd49b784b39321b2d15, type: 3}
+  keyPickUp: {fileID: 8300000, guid: 650e59917c61d014dafb2173f7393b83, type: 3}
+  shipHit: {fileID: 8300000, guid: af302d13a2bff4e4ba22586d8f12dd24, type: 3}
+  cheer: {fileID: 8300000, guid: e7ad28ebd537622488029026bf563d0d, type: 3}
 --- !u!124 &124571372196719976
 Behaviour:
   m_ObjectHideFlags: 1
