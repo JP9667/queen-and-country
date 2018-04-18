@@ -6,7 +6,7 @@ public class DockCollision : MonoBehaviour {
 
     public bool playerShipHasDocked = false;
     public GameObject pauseController;
-    public GameObject playerShipUI;
+    //public GameObject playerShipUI;
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -14,8 +14,6 @@ public class DockCollision : MonoBehaviour {
         {
             playerShipHasDocked = true;
             pauseController.GetComponent<PauseController>().PauseDialogMenu();
-            playerShipUI.GetComponent<UIPlayerShip>().timerStarted = true;
-
         }
     }
 

@@ -10,10 +10,6 @@ public class CannonballCollision : MonoBehaviour {
         if(other.gameObject.transform.tag == "Enemy Ship")
         {
             print("Cannonball hit enemy ship");
-            if (other.gameObject.GetComponent<EnemyShipController>().hasKey)
-            {
-                GameObject.FindWithTag("Player Ship").GetComponent<PlayerShipController>().hasKey = true;
-            }
 
             Destroy(other.gameObject);
         }
@@ -21,7 +17,7 @@ public class CannonballCollision : MonoBehaviour {
         if (other.gameObject.transform.tag == "Treasure Ship")
         {
             print("Cannonball hit treasure ship");
-            GameObject.FindWithTag("Player Ship").GetComponent<PlayerShipController>().HasTreasure();
+            GameObject.FindWithTag("Player Ship").GetComponent<PlayerShipController>().PickupTreasure();
             Destroy(other.gameObject);
         }
 
@@ -32,19 +28,13 @@ public class CannonballCollision : MonoBehaviour {
         if (collision.gameObject.transform.tag == "Enemy Ship")
         {
             print("Cannonball hit enemy ship");
-            if (transform.tag == "Player Cannonball" && collision.gameObject.GetComponent<EnemyShipController>().hasKey)
-            {
-                GameObject.FindWithTag("Player Ship").GetComponent<PlayerShipController>().hasKey = true;
-            }
-
-            //Destroy(other.gameObject);
         }
 
         if (collision.gameObject.transform.tag == "Treasure Ship")
         {
             print("Cannonball hit treasure ship");
             collision.gameObject.GetComponent<WaterBuoyancy.FloatingObject>().sinkShip();
-            GameObject.FindWithTag("Player Ship").GetComponent<PlayerShipController>().HasTreasure();
+            GameObject.FindWithTag("Player Ship").GetComponent<PlayerShipController>().PickupTreasure();
             //Destroy(collision.gameObject);
         }
 

@@ -85,7 +85,7 @@ namespace WaterBuoyancy
 
             if (isSinking)
             {
-                this.density += 0.05f * Time.deltaTime;
+                this.density += 0.1f * Time.deltaTime;
                 //this.normalizedVoxelSize = 0.9f;
             }
         }

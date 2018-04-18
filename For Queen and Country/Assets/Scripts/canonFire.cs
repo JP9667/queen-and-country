@@ -11,6 +11,7 @@ public class canonFire : MonoBehaviour
     private float fireTime;
 
     public int numCannonBalls = 5;
+    public AudioClip cannonFireSound; 
 
     private bool firingAtPlayer = false;
 
@@ -36,6 +37,9 @@ public class canonFire : MonoBehaviour
                 //newBullet.GetComponent<Rigidbody>().AddForce(newBullet.transform.right * 1000);
                 numCannonBalls -= 1;
                 Destroy(newBullet, 1.0f); //gets rid of shot cannons after a second
+
+                GetComponent<AudioSource>().PlayOneShot(cannonFireSound);
+
             }
         }
     }

@@ -8,11 +8,14 @@ public class PauseController : MonoBehaviour {
 
     public Transform pauseBackground;
     public Transform pauseMenu;
-    public Transform storyMenu;
+    public Transform openingScreen;
+    public Transform controlsAndObjectivesScreen;
     public Transform dialogMenu;
     public Transform endMenu;
+    public Transform creditsScreen;
 
     public Transform playerShip;
+    public GameObject playerShipUI;
 
     public Text endText;
 
@@ -46,15 +49,34 @@ public class PauseController : MonoBehaviour {
 
     public void PauseStartingScreen()
     {
-        if (storyMenu.gameObject.activeInHierarchy == false)
+        if (openingScreen.gameObject.activeInHierarchy == false)
         {
-            storyMenu.gameObject.SetActive(true);
+            openingScreen.gameObject.SetActive(true);
             Time.timeScale = 0;
             playerShip.GetComponent<PlayerShipController>().enabled = false;
         }
         else
         {
-            storyMenu.gameObject.SetActive(false);
+            openingScreen.gameObject.SetActive(false);
+            controlsAndObjectivesScreen.gameObject.SetActive(true);
+        }
+    }
+
+    public void ClosingCreditsScreen()
+    {
+        if (creditsScreen.gameObject.activeInHierarchy == false)
+        {
+            creditsScreen.gameObject.SetActive(true);
+            Time.timeScale = 0;
+            playerShip.GetComponent<PlayerShipController>().enabled = false;
+        }
+    }
+
+    public void ControlsAndObjectivesScreen()
+    {
+        if(controlsAndObjectivesScreen.gameObject.activeInHierarchy == true)
+        {
+            controlsAndObjectivesScreen.gameObject.SetActive(false);
             Time.timeScale = 1;
             playerShip.GetComponent<PlayerShipController>().enabled = true;
         }
@@ -73,6 +95,8 @@ public class PauseController : MonoBehaviour {
             dialogMenu.gameObject.SetActive(false);
             Time.timeScale = 1;
             playerShip.GetComponent<PlayerShipController>().enabled = true;
+            playerShip.GetComponent<PlayerShipController>().ringBell();
+            playerShipUI.GetComponent<UIPlayerShip>().timerStarted = true;
         }
     }
 

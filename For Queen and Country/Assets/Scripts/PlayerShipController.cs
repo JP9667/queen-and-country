@@ -12,14 +12,16 @@ public class PlayerShipController : MonoBehaviour {
     public float movementThreshold;
     public float cannonballSpeed = 20.0f;
     public bool hasKey = false;
-    public float shipHealth = 100.0f;
+    public float maxShipHealth = 100.0f;
+    public float currentShipHealth = 0f;
 
-    //public bool inWindZone = false;
     private Rigidbody rb;
 
     private float movementFactor;
     private float steerFactor;
     private float currentSpeed = 0.0f;
+    private float nextFire;
+    private float fireRate = 1.0f;
 
     public GameObject cannonball;
     public GameObject[] portCannons = new GameObject[3];
@@ -30,6 +32,11 @@ public class PlayerShipController : MonoBehaviour {
     private GameObject rearCannonball;
     public GameObject treasureChest;
     public GameObject pauseController;
+    private PauseController pauseControllerScript;
+    public GameObject playerUI;
+    private UIPlayerShip playerUIScript;
+    public GameObject soundObject;
+    private AudioSource quieterAudioSource;
 
     float angle = 0.0f;
     float tiltSpeed = 30.0f;
@@ -37,10 +44,24 @@ public class PlayerShipController : MonoBehaviour {
     public float lineAngle = 10.0f;
     public Vector3 sidePosition;
 
+    private AudioSource audioSource;
+    public AudioClip cannonFireSound;
+    public AudioClip bellRingSound;
+    public AudioClip itemPickUp;
+    public AudioClip keyPickUp;
+    public AudioClip shipHit;
+    public AudioClip cheer;
+
     // Use this for initialization
     void Start () {
         rb = GetComponent<Rigidbody>();
-	}
+        audioSource = GetComponent<AudioSource>();
+        quieterAudioSource = soundObject.GetComponent<AudioSource>();
+        currentShipHealth = maxShipHealth;
+        pauseControllerScript = pauseController.GetComponent<PauseController>();
+        playerUIScript = playerUI.GetComponent<UIPlayerShip>();
+        pauseControllerScript.PauseStartingScreen();
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -65,46 +86,92 @@ public class PlayerShipController : MonoBehaviour {
 
         if (Input.GetKeyDown(KeyCode.Q) || Input.GetMouseButtonDown(0))
         {
-            for(int i = 0; i < 3; i++)
+            if(Time.time > nextFire)
             {
-                //Vector3 cannonExit = new Vector3(portCannons[i].transform.position.x, portCannons[i].transform.position.y, portCannons[i].transform.position.z - 0.1f);
-                portCannonballs[i] = Instantiate(cannonball, portCannons[i].transform.position, portCannons[i].transform.rotation);
-                portCannonballs[i].tag = "Player Cannonball";
-                portCannonballs[i].GetComponent<Rigidbody>().velocity = portCannonballs[i].transform.forward * cannonballSpeed;
-                Destroy(portCannonballs[i], 1.0f);
+                nextFire = Time.time + fireRate;
+                playerUIScript.startCannonTimer(fireRate);
+                for (int i = 0; i < 3; i++)
+                {
+                    //Vector3 cannonExit = new Vector3(portCannons[i].transform.position.x, portCannons[i].transform.position.y, portCannons[i].transform.position.z - 0.1f);
+                    portCannonballs[i] = Instantiate(cannonball, portCannons[i].transform.position, portCannons[i].transform.rotation);
+                    portCannonballs[i].tag = "Player Cannonball";
+                    portCannonballs[i].GetComponent<Rigidbody>().velocity = portCannonballs[i].transform.forward * cannonballSpeed;
+                    Destroy(portCannonballs[i], 1.0f);
+                }
+                audioSource.PlayOneShot(cannonFireSound);
             }
         }
         if (Input.GetKeyDown(KeyCode.E) || Input.GetMouseButtonDown(1))
         {
-            for (int i = 0; i < 3; i++)
+            if (Time.time > nextFire)
             {
-                starBoardCannonballs[i] = Instantiate(cannonball, starBoardCannons[i].transform.position, starBoardCannons[i].transform.rotation);
-                starBoardCannonballs[i].tag = "Player Cannonball";
-                starBoardCannonballs[i].GetComponent<Rigidbody>().velocity = starBoardCannonballs[i].transform.forward * cannonballSpeed;
-                Destroy(starBoardCannonballs[i], 1.0f);
+                nextFire = Time.time + fireRate;
+                playerUIScript.startCannonTimer(fireRate);
+                for (int i = 0; i < 3; i++)
+                {
+                    starBoardCannonballs[i] = Instantiate(cannonball, starBoardCannons[i].transform.position, starBoardCannons[i].transform.rotation);
+                    starBoardCannonballs[i].tag = "Player Cannonball";
+                    starBoardCannonballs[i].GetComponent<Rigidbody>().velocity = starBoardCannonballs[i].transform.forward * cannonballSpeed;
+                    Destroy(starBoardCannonballs[i], 1.0f);
+                }
+                audioSource.PlayOneShot(cannonFireSound);
             }
         }
         if (Input.GetKeyDown(KeyCode.F))
         {
-            rearCannonball = Instantiate(cannonball, rearCannon.transform.position, rearCannon.transform.rotation);
-            rearCannonball.tag = "Player Cannonball";
-            rearCannonball.GetComponent<Rigidbody>().velocity = rearCannonball.transform.forward * cannonballSpeed;
-            Destroy(rearCannonball, 1.0f);
+            if (Time.time > nextFire)
+            {
+                nextFire = Time.time + fireRate;
+                playerUIScript.startCannonTimer(fireRate);
+
+                rearCannonball = Instantiate(cannonball, rearCannon.transform.position, rearCannon.transform.rotation);
+                rearCannonball.tag = "Player Cannonball";
+                rearCannonball.GetComponent<Rigidbody>().velocity = rearCannonball.transform.forward * cannonballSpeed;
+                Destroy(rearCannonball, 1.0f);
+                audioSource.PlayOneShot(cannonFireSound);
+            }
         }
 
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-
         if(collision.gameObject.transform.tag == "Cannon Ball")
         {
             Destroy(collision.gameObject);
-            shipHealth -= 5;
 
-            if(shipHealth <= 0)
+            currentShipHealth -= 5;
+            playerUIScript.setHealthBar(currentShipHealth, maxShipHealth);
+
+            if (currentShipHealth <= 0)
             {
-                pauseController.GetComponent<PauseController>().EndGameMenu(false);
+                pauseControllerScript.EndGameMenu(false);
+            }
+
+            quieterAudioSource.PlayOneShot(shipHit);
+        }
+
+        if (collision.gameObject.transform.tag == "Item Pickup")
+        {
+            Destroy(collision.gameObject);
+
+            currentShipHealth += 1.5f;
+            if (currentShipHealth >= 100)
+            {
+                currentShipHealth = 100;
+            }
+
+            playerUIScript.setHealthBar(currentShipHealth, maxShipHealth);
+            playerUIScript.timeLeft += 1.2f;
+
+            if(collision.transform.name == "Enemy Ship Pickup(Key)")
+            {
+                quieterAudioSource.PlayOneShot(keyPickUp);
+                hasKey = true;
+            }
+            else
+            {
+                audioSource.PlayOneShot(itemPickUp);
             }
 
         }
@@ -115,18 +182,24 @@ public class PlayerShipController : MonoBehaviour {
         if (other.gameObject.transform.tag == "Dock")
         {
             print("You win!");
-            pauseController.GetComponent<PauseController>().EndGameMenu(true);
+            pauseControllerScript.EndGameMenu(true);
         }
     }
 
-    public void HasTreasure()
+    public void PickupTreasure()
     {
+        //audioSource.PlayOneShot(cheer);
         treasureChest.SetActive(true);
     }
 
     public void TimeRanOut()
     {
-        pauseController.GetComponent<PauseController>().EndGameMenu(false);
+        pauseControllerScript.EndGameMenu(false);
+    }
+
+    public void ringBell()
+    {
+        audioSource.PlayOneShot(bellRingSound);
     }
 
 }
